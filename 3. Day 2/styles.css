@@ -1,0 +1,22 @@
+/* Center the button */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  flex-direction: column;
+  background: #eef; /* Optional background */
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #e91e63;
+  font-weight: bold;
+}
