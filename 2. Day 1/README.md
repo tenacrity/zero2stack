@@ -1,2 +1,2 @@
 # zero2stack
-Day 1 (Mon): JS Basics & “Helloˮ Script
+Day 1 : JS Basics & “Helloˮ Script
