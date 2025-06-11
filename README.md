@@ -1,2 +1,2 @@
 # zero2stack
-Coding is fun when done right with the right folks
+Day 1 (Mon): JS Basics & “Helloˮ Script
