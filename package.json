@@ -1,0 +1,24 @@
+{
+  "name": "zero2stack",
+  "version": "1.0.0",
+  "description": "Coding is fun when done right with the right folks",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenacrity/zero2stack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tenacrity/zero2stack/issues"
+  },
+  "homepage": "https://github.com/tenacrity/zero2stack#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
