@@ -6,5 +6,5 @@ app.get("/api/hello", (req, res) => {
 });
 // Start the server
 app.listen(3000, () => {
-  console.log("Listening on http://localhost:3000");
+  console.log("Listening on http://localhost:3000/api/hello");
 });
