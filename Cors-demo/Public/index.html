@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS Demo</title>
+</head>
+<body>
+  <h1>Fetching Time from API...</h1>
+
+  <script>
+    fetch("http://localhost:4000/api/time")
+      .then(res => res.json())
+      .then(data => {
+        document.body.innerHTML = `<h2>Time from server:</h2><p>${data.now}</p>`;
+      })
+      .catch(err => {
+        document.body.innerHTML = `<p>Error: ${err.message}</p>`;
+      });
+  </script>
+</body>
+</html>
