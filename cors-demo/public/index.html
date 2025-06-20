@@ -1,0 +1,5 @@
+<script>
+ fetch("http://localhost:4000/api/time")
+ .then(r => r.json())
+ .then(data => document.body.innerText=data.now);
+</script>
