@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Changer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      transition: all 0.5s ease;
+    }
+
+    .happy {
+      background-color: #f7ffde;
+      color: #2e8b57;
+    }
+
+    .sad {
+      background-color: #cbe3f2;
+      color: #003366;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="happy">
+  <h1 id="moodText">Feeling Happy 😄</h1>
+  <button id="moodBtn">Change Mood</button>
+
+  <script>
+    // DOM Selection
+    const moodBtn = document.getElementById("moodBtn");
+    const moodText = document.getElementById("moodText");
+    const body = document.body;
+
+    // Event Listener
+    moodBtn.addEventListener("click", () => {
+      // Class Toggling
+      body.classList.toggle("happy");
+      body.classList.toggle("sad");
+
+      // Text Update
+      if (body.classList.contains("sad")) {
+        moodText.innerText = "Feeling Sad 😢";
+        moodBtn.innerText = "Cheer Up!";
+      } else {
+        moodText.innerText = "Feeling Happy 😄";
+        moodBtn.innerText = "Change Mood";
+      }
+    });
+  </script>
+</body>
+</html>
