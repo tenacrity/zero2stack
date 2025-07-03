@@ -1,27 +1,19 @@
-let tasks = [];
-let nextId = 1;
-
-class Task {
-  constructor(text) {
-    this.id = nextId++;
-    this.text = text;
-    this.done = false;
-    this.createdAt = new Date();
-  }
-}
+// models/taskModel.js
+import { pool } from '../db.js';
 
 export const taskModel = {
-  getAll: () => [...tasks],
-  getById: (id) => tasks.find(task => task.id === id),
-  create: (text) => {
-    const task = new Task(text);
-    tasks.push(task);
-    return task;
+  getAll: async () => {
+    const result = await pool.query('SELECT * FROM tasks ORDER BY created_at DESC');
+    return result.rows;
   },
-  delete: (id) => {
-    const index = tasks.findIndex(task => task.id === id);
-    if (index === -1) return false;
-    tasks.splice(index, 1);
-    return true;
-  }
+  create: async (title) => {
+    const result = await pool.query(
+      'INSERT INTO tasks (title, completed) VALUES ($1, false) RETURNING *',
+      [title]
+    );
+    return result.rows[0];
+  },
+  delete: async (id) => {
+    await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
+  },
 };

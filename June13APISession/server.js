@@ -1,48 +1,68 @@
 // server.js
-import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
+import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import { taskModel } from './models/taskModel.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import { logger } from './middleware/logger.js';
-import tasksRouter from './routes/tasks.js';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// For __dirname in ES modules
+// Enable __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
-app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
-app.use(logger);
-
-// Serve static files (e.g., public/index.html, CSS, JS)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Optional: Serve index.html at root URL
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Routes
+app.get('/tasks', async (req, res, next) => {
+  try {
+    const tasks = await taskModel.getAll();
+    res.json({ success: true, data: tasks });
+  } catch (err) {
+    next(err);
+  }
 });
 
-// API Routes
-app.use('/tasks', tasksRouter);
+app.post('/tasks', async (req, res, next) => {
+  try {
+    const { title } = req.body;
 
-// Health check (optional but useful)
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
+    // Debug log — can be removed later
+    console.log('Received POST /tasks:', req.body);
+
+    // ✅ Validation: prevent null/undefined/empty strings
+    if (!title || typeof title !== 'string' || title.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        error: 'Task title is required and must be a non-empty string.',
+      });
+    }
+
+    const task = await taskModel.create(title.trim());
+    res.status(201).json({ success: true, data: task });
+  } catch (err) {
+    next(err);
+  }
 });
 
-// Error Handling Middleware
+app.delete('/tasks/:id', async (req, res, next) => {
+  try {
+    await taskModel.delete(req.params.id);
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Global error handler
 app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
+  console.log(`✅ Server is running on http://localhost:${PORT}`);
 });
