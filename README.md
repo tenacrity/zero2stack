@@ -43,11 +43,13 @@ Edit
 git clone https://github.com/tenacrity/zero2stack.git
 cd zero2stack
 git checkout June15APINodeJSSession_with-DB
+
 2. Install dependencies
 bash
 Copy
 Edit
 npm install
+
 3. Configure your environment
 Copy .env.example → .env
 
@@ -62,6 +64,7 @@ DB_NAME=zero2stack
 DB_USER=root
 DB_PASS=yourpassword
 SESSION_SECRET=yourSecret
+
 4. Start the database
 With Docker:
 
