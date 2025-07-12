@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Task Manager</h1>
+    <form id="taskForm">
+      <input type="text" id="taskInput" placeholder="Enter task text" required />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Tasks</h2>
+    <div id="taskList"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('taskForm');
+    const input = document.getElementById('taskInput');
+    const list = document.getElementById('taskList');
+
+    async function fetchTasks() {
+      const res = await fetch('/api/tasks');
+      const tasks = await res.json();
+      renderTasks(tasks);
+    }
+
+    function renderTasks(tasks) {
+      list.innerHTML = '';
+      if (tasks.length === 0) {
+        list.innerHTML = '<p>No tasks yet!</p>';
+        return;
+      }
+      tasks.forEach(task => {
+        const div = document.createElement('div');
+        div.className = 'task-card';
+        div.innerHTML = `
+          <p><strong>${task.text}</strong></p>
+          <p>Created: ${new Date(task.created_at).toLocaleString()}</p>
+          <button data-id="${task.id}" class="delete-btn">Delete</button>
+        `;
+        div.querySelector('.delete-btn').addEventListener('click', async (e) => {
+          const id = e.target.getAttribute('data-id');
+          await fetch('/api/tasks/' + id, { method: 'DELETE' });
+          fetchTasks();
+        });
+        list.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (text) {
+        await fetch('/api/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        input.value = '';
+        fetchTasks();
+      }
+    });
+
+    fetchTasks();
+  </script>
+</body>
+</html>

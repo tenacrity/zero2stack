@@ -1,0 +1,61 @@
+body {
+  font-family: sans-serif;
+  background-color: #f6f6f6;
+}
+
+.container {
+  width: 500px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+form button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.task-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.task-card p {
+  margin: 5px 0;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
