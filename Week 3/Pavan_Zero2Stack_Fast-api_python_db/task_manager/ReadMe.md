@@ -50,5 +50,6 @@ alembic upgrade head
 bash
 Copy
 Edit
+
 uvicorn main:app --reload
 Visit: http://127.0.0.1:8000/docs
