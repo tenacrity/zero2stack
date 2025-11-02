@@ -1,0 +1,23 @@
+
+
+This day we discussed about the silence of the folks.
+Need to much more interactive with every one..
+
+
+We people interacted with each other and help each other in the git branch creation and pushing the code in it.
+This helps to get the experience of the team work and collaboration.
+
+Then we discussed about the TDD-Test Driven Development
+	-> In this the use of PyTest
+	-> Pytest helps in the testcases management. RED first then GREEN
+
+--> Documentation Mindset: Understanding the Document
+--> Programming Flow: involves validation and operations
+--> Interest: Failure to ask Questions ahead : Scope Creep
+--> Empathy: Don't have empathy then it impacts business
+
+Asking and getting questions help to get the various thoughts.
+
+We need to work on pytest and understand the pytest and how it works and helps.
+
+We have also seen nearly 80 test cases that chat gpt have given for a simple example[Form -> First, Middle, Last name and Phone].
