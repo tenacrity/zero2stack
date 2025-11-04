@@ -1,0 +1,13 @@
+Git clone <url> - for new repo
+git add <file name> - add specific file
+git add . - add all the files
+git commit -m "Message" - git commit with massage
+git pull - pull the latest files from git repo 
+git push origin masater - push the to masater repo
+git checkout -b <branch name> - create new branch 
+git checkout <branch name> - switch branch
+git remote - v - check current repo
+git status - check status on repo
+git log - check all the logs in repo
+git log - oneline - check all the within oneline high level
+git init - initializes a new Git repository
