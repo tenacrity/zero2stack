@@ -4,3 +4,4 @@ let highestScore = 95.5;
 const Student = false;
 console.log("name:", name,"age:", age,"Score:", highestScore,"Student:", Student);
 name = "Kumar";
+//basic_program_1_variables.js:6
