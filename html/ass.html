@@ -64,11 +64,22 @@
     <label>Name:</label><br>
     <input type="text" id="NAME" placeholder="first name"><br>
     <label>Phone:</label><br>
-    <input type="text" id="phone" placeholder="+91XXXXXXXXXX" value="+91"><br>
+    <input type="text" id="phone" placeholder="+91-----------" value="+91"><br>
 
     <button onclick="submitForm()">Submit</button>
 
     <p id="message"></p>
+    <table id="resultTable" style="display:none;">
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+      </tr>
+      <tr>
+        <td id="resultName"></td>
+        <td id="resultPhone"></td>
+      </tr>
+    </table>
+  </div>
 
     
   </div>
