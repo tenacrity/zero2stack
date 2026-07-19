@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Validation Report</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        background: #f5f5f5;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    input {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background: white;
+    }
+
+    th {
+        background: #007acc;
+        color: white;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+        background: #f2f2f2;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px #ccc;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Upload JSON Report</h2>
+
+<input type="file" id="fileInput" accept=".json">
+
+<h3>Summary</h3>
+
+<table id="summaryTable">
+    <thead>
+        <tr>
+            <th>JID</th>
+            <th>AID</th>
+            <th>Message</th>
+            <th>DTD Errors Count</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<h3>DTD Validation Errors</h3>
+
+<table id="errorTable">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Line</th>
+            <th>Column</th>
+            <th>Error Message</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+</div>
+
+<script>
+
+document.getElementById("fileInput").addEventListener("change", function(event){
+
+    const file = event.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        const json = JSON.parse(e.target.result);
+
+        //---------------- Summary ----------------
+
+        const summaryBody = document.querySelector("#summaryTable tbody");
+
+        summaryBody.innerHTML = "";
+
+        summaryBody.innerHTML = `
+        <tr>
+            <td>${json.jid || ""}</td>
+            <td>${json.aid || ""}</td>
+            <td>${json.message || ""}</td>
+            <td>${json.dtdErrors || 0}</td>
+        </tr>
+        `;
+
+        //---------------- Error Table ----------------
+
+        const errorBody = document.querySelector("#errorTable tbody");
+
+        errorBody.innerHTML = "";
+
+        if(json.dtdValidationErrors){
+
+            json.dtdValidationErrors.forEach((err,index)=>{
+
+                errorBody.innerHTML += `
+                <tr>
+                    <td>${index+1}</td>
+                    <td>${err.line}</td>
+                    <td>${err.column}</td>
+                    <td>${err.message}</td>
+                </tr>
+                `;
+
+            });
+
+        }
+
+    };
+
+    reader.readAsText(file);
+
+});
+
+</script>
+
+</body>
+</html>
